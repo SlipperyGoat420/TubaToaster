@@ -1,0 +1,54 @@
+
+/**
+ * Write a description of class InsertionSort here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class InsertionSort
+{
+    private int[] nums;
+    private int count;
+    private int comparisons;
+    public void sort(int[] nums)
+    {
+        count = 0;
+        comparisons = 0;
+        for (int i = 1; i < nums.length; i++)
+        {
+            int temp = nums[i];
+            int j = i - 1;
+            comparisons++;
+            while (j >= 0 && nums[j] > temp)
+            {
+                nums[j+1] = nums[j];
+                j = j - 1;
+                count++;
+                comparisons++;
+            }
+            nums[j+1] = temp;
+        }
+    }    
+    public void printArray(int[] nums)
+    {
+        for (int i = 0; i < nums.length; i++)
+        {
+            System.out.print(nums[i] + " ");
+        }
+        System.out.println();
+        System.out.println("Switch Count: " + count);
+        System.out.println("Comparison Count: " + comparisons);
+    }
+    public static void main(String[] args)
+   {
+       InsertionSort data = new InsertionSort();
+       ArrayGenerator values = new ArrayGenerator();
+       int size = 10;
+       int maxNum = 100;
+       int[] array = values.generate(size,maxNum);
+       data.sort(array);
+       System.out.println("Selection Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       data.printArray(array);
+       System.out.println();
+   }
+}
