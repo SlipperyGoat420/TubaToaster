@@ -1,0 +1,39 @@
+
+/**
+ * QuickSort is a Divide and Conquer algorithm. It picks an element as pivot 
+ * and partitions the given array around the picked pivot. There are many 
+ * different versions of quickSort that pick pivot in different ways. 
+ * 1. Always pick first element as pivot
+ * 2. Always pick last element as pivot (implemented below)
+ * 3. Pick a random element as pivot.
+ * 4. Pick median as pivot.
+ * The key process in quickSort is partition(). Target of partitions is, given 
+ * an array and an element x of array as pivot, put x at its correct position 
+ * in sorted array and put all smaller elements (smaller than x) before x,
+ * and put all greater elements (greater than x) after x. 
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class QuickSort
+{
+    private int[] nums; 
+    private int count; 
+    private int comparisons;
+    public int partition(int[] num, int low, int high)
+    {
+        return 0;
+    }
+    public void sort(int[] num, int low, int high)
+    {
+        
+    }
+    public void printArray(int[] nums)
+    {
+        for (int i = 0; i < nums.length; i++)
+        {
+            System.out.print(nums[i] + " ");
+        }
+        System.out.println();
+    }
+}
