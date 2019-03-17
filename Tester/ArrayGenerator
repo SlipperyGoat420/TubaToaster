@@ -1,0 +1,93 @@
+
+public class ArrayGenerator
+{
+    private int[] array;
+    private int size;
+    private int max;
+    public static int[] generate(int size, int maxNum)
+    {
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++)
+        {
+            int random = (int)(Math.random() * maxNum + 1);
+            array[i] = random;
+        }
+        return array;
+    }
+    public void toString(int[] array)
+    {
+       for (int i = 0; i < array.length; i++)
+       {
+           System.out.print(array[i] + " ");
+       }
+       System.out.println();
+    }
+    public static void main(String[] args)
+    {
+        ArrayGenerator data = new ArrayGenerator();
+        int size = 100;
+        int maxNum = 200;
+        int[] array = data.generate(size,maxNum);
+        data.toString(array);
+    }
+}
+
+
+
+public class SortingTest
+{
+    public static void main(String[] args)
+   {
+       int size = 15;
+       int maxNum = 100;
+       ArrayGenerator values = new ArrayGenerator();
+       int[] array = values.generate(size,maxNum);
+       int[] arrayX = new int[size];
+       int[] arrayY = new int[size];
+       int[] arrayZ = new int[size];
+       int[] arrayQ = new int[size];
+       
+       for (int i = 0; i < array.length; i++)
+       {
+            System.out.print(array[i] + " ");
+       }
+       for (int i = 0; i < array.length; i++)
+       {
+           arrayX[i] = array[i];
+           arrayY[i] = array[i];
+           arrayZ[i] = array[i];
+           arrayQ[i] = array[i];
+       }
+       System.out.println();
+  
+       SelectionSort data = new SelectionSort();
+       data.sort(array);
+       System.out.println("Selection Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       data.printArray(array);
+       System.out.println();
+       
+       BubbleSort dataX = new BubbleSort();
+       dataX.sort(arrayX);
+       System.out.println("Bubble Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       dataX.printArray(arrayX);
+       System.out.println();
+      
+       InsertionSort dataY = new InsertionSort();
+       dataY.sort(arrayY);
+       System.out.println("Insertion Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       dataY.printArray(arrayY);
+       System.out.println();
+       
+       MergeSort dataZ = new MergeSort();
+       dataZ.sort(arrayZ, 1, 1);
+       System.out.println("Merge Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       dataZ.printArray(arrayZ);
+       System.out.println();
+       
+       QuickSort dataQ = new QuickSort();
+       dataQ.sort(arrayQ, 1, 1);
+       System.out.println("Merge Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       dataQ.printArray(arrayQ);
+       System.out.println();
+   }
+}
