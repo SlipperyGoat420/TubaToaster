@@ -1,0 +1,51 @@
+
+/**
+ * The selection sort algorithm sorts an array by repeatedly finding the minimum 
+ * element (considering ascending order) from unsorted part and putting it at the 
+ * beginning. The algorithm maintains two subarrays in a given array.
+ * 1) The subarray which is already sorted.
+ * 2) Remaining subarray which is unsorted.
+ * In every iteration of selection sort, the minimum element (considering ascending 
+ * order) from the unsorted subarray is picked and moved to the sorted subarray. 
+ *
+ * @author (Dylan Narkawicz)
+ * @version (1.15.19)
+ */
+public class SelectionSort
+{
+    private int[] nums;
+    private int count;
+    private int comparison;
+    public void sort(int[] nums)
+    {
+        count = 0;
+        comparison = 0;
+        for (int i = 0; i < nums.length - 1; i++)
+        {
+            int minIdx = i;
+            for (int j = i + 1; j < nums.length; j++)
+            {
+                comparison++;
+                if (nums[j] < nums[minIdx])
+                {
+                    minIdx = j;
+                }
+            }
+            int temp = nums[minIdx];
+            nums[minIdx] = nums[i];
+            nums[i] = temp;
+            count++;
+        }
+   }
+   public void printArray(int nums[])
+   {
+       for (int i = 0; i < nums.length; i++)
+       {
+           System.out.print(nums[i] + " ");
+       }
+       System.out.println();
+       System.out.println("Switch Count: " + count);
+       System.out.println("Comparison Count: " + comparison);
+   }
+}
+    
