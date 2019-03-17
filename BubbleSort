@@ -1,0 +1,43 @@
+
+/**
+ * Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping 
+ * the adjacent elements if they are in wrong order.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class BubbleSort
+{
+    private int[] nums;
+    private int count;
+    private int comparisons;
+    public void sort(int[] nums)
+    {
+        count = 0;
+        comparisons = 0;
+        for (int i = 0; i < nums.length-1; i++)
+        {
+            for (int j = 0; j < nums.length-i-1; j++)
+            {
+                comparisons++;
+                if (nums[j] > nums[j+1])
+                {    
+                    int temp = nums[j];
+                    nums[j] = nums[j+1];
+                    nums[j+1] = temp;
+                    count++;
+                }
+            }
+        }
+    }
+    public void printArray(int[] nums)
+    {
+        for (int i = 0; i < nums.length; i++)
+        {
+            System.out.print(nums[i] + " ");
+        }
+        System.out.println();
+        System.out.println("Switch Count: " + count);
+        System.out.println("Comparison Count: " + comparisons);
+    }  
+}
