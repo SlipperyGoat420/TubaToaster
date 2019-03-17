@@ -1,0 +1,31 @@
+
+/**
+ * Merge Sort is a Divide and Conquer algorithm. It divides input array in two 
+ * halves, calls itself for the two halves and then merges the two sorted halves.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class MergeSort
+{
+    private int[] nums;
+    private int count;
+    private int comparisons;
+    public void merge(int[] nums, int left, int middle, int right)
+    {
+        middle = (left + right) / 2;
+    }
+    public void sort(int[] nums, int left, int right)
+    {
+        int middle = (left - (right - left)) / 2;
+        merge(nums, left, middle, right);
+    }
+    public void printArray(int[] nums)
+    {
+        for (int i = 0; i < nums.length; i++)
+        {
+            System.out.print(nums[i] + " ");
+        }
+        System.out.println();
+    }
+}
