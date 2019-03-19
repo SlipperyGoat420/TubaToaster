@@ -1,0 +1,147 @@
+/**
+ * Merge Sort is a Divide and Conquer algorithm. It divides input array in two 
+ * halves, calls itself for the two halves and then merges the two sorted halves.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class MergeSort
+{
+    private int[] nums;
+    private int count;
+    private int comparisons;
+    public void merge(int[] nums, int left, int middle, int right)
+    {
+        int l = middle - left + 1;
+        int r = right - middle;
+        
+        int LeftArr[] = new int [l];
+        int RightArr[] = new int [r];
+        
+        for (int i = 0; i < l; i++)
+        {
+            LeftArr[i] = nums[left + i];
+        }
+        for (int j = 0; j < r; j++)
+        {
+            RightArr[j] = nums[middle + 1 + j];
+        }
+        
+        int i = 0, j = 0, k = left;
+        while (i < l && j < r)
+        {
+            if (LeftArr[i] < RightArr[j])
+            {
+                nums[k] = LeftArr[i];
+                i++;
+                count++;
+            }
+            else
+            {
+                nums[k] = RightArr[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < l)
+        {
+            nums[k] = LeftArr[i];
+            k++;
+            i++;
+        }
+        while (j < r)
+        {
+            nums[k] = RightArr[j];
+            k++;
+            j++;
+        }
+    }
+    public void sort(int[] nums, int left, int right)
+    {
+        if (left < right)
+        {
+            int middle = (left + right) / 2;
+            sort(nums, left, middle);
+            sort(nums, middle + 1, right);
+            merge(nums, left, middle, right);
+        }
+    }
+    public void printArray(int[] nums)
+    {
+        for (int i = 0; i < nums.length; i++)
+        {
+            System.out.print(nums[i] + " ");
+        }
+        System.out.println();
+    }
+}
+
+
+
+
+
+/**
+ * Write a description of class h here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class SortingTest
+{
+    public static void main(String[] args)
+   {
+       int size = 15;
+       int maxNum = 100;
+       ArrayGenerator values = new ArrayGenerator();
+       int[] array = values.generate(size,maxNum);
+       int[] arrayX = new int[size];
+       int[] arrayY = new int[size];
+       int[] arrayZ = new int[size];
+       int[] arrayQ = new int[size];
+       
+       System.out.println("Initial Array: ");
+       for (int i = 0; i < array.length; i++)
+       {
+            System.out.print(array[i] + " ");
+       }
+       System.out.println("");
+       for (int i = 0; i < array.length; i++)
+       {
+           arrayX[i] = array[i];
+           arrayY[i] = array[i];
+           arrayZ[i] = array[i];
+           arrayQ[i] = array[i];
+       }
+       System.out.println();
+  
+       SelectionSort data = new SelectionSort();
+       data.sort(array);
+       System.out.println("Selection Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       data.printArray(array);
+       System.out.println();
+       
+       BubbleSort dataX = new BubbleSort();
+       dataX.sort(arrayX);
+       System.out.println("Bubble Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       dataX.printArray(arrayX);
+       System.out.println();
+      
+       InsertionSort dataY = new InsertionSort();
+       dataY.sort(arrayY);
+       System.out.println("Insertion Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       dataY.printArray(arrayY);
+       System.out.println();
+       
+       MergeSort dataZ = new MergeSort();
+       dataZ.sort(arrayZ, 0, arrayZ.length - 1);
+       System.out.println("Merge Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       dataZ.printArray(arrayZ);
+       System.out.println();
+       
+       QuickSort dataQ = new QuickSort();
+       dataQ.sort(arrayQ, 1, 1);
+       System.out.println("Quick Sort" + "\n" + "Size: " + size + "     " + "Maximum Value: " + maxNum);
+       dataQ.printArray(arrayQ);
+       System.out.println();
+   }
+}
