@@ -1,0 +1,181 @@
+PImage kitchenImg;
+PImage gordonImg;
+PImage rawLambImg;
+PImage chickNugImg;
+PImage endImg;
+ArrayList<RLamb> rawLambs = new ArrayList<RLamb>();
+ArrayList<CNug> chickNugs = new ArrayList<CNug>();
+int startTime = millis();
+int startTime2=millis();
+int lives=3;
+int numLambsCaught=0;
+static int highScore=0;
+
+void setup(){
+  size(1200, 800);
+  kitchenImg = loadImage("Downloads/Hells-Kitchen-Dubai.jpg");
+  kitchenImg.resize(1200,800);
+  gordonImg =loadImage("Downloads/image1.png");
+  gordonImg.resize(125,125);
+  rawLambImg = loadImage("Downloads/image.png");
+  rawLambImg.resize(90,90);
+  chickNugImg = loadImage("Downloads/IMG_5129.PNG");
+  chickNugImg.resize(90,90);
+  endImg = loadImage("Downloads/IMG_5185.JPG");
+  endImg.resize(1200,1000);
+  chickNugs.add(new CNug(random(100, width-100), random(100, height-100), 6, 6));
+  chickNugs.add(new CNug(random(100, width-100), random(100, height-100), 6, 6));
+}
+
+
+void draw(){
+  background(200);
+  image(kitchenImg,0,0);
+  image(gordonImg,mouseX-60,mouseY-60);
+  textSize(30);
+  text("Lives:",10,30);
+  text(lives, 100, 31);
+  text("Score:", 10,57);
+  text(numLambsCaught,100,57);
+  fill(0,0,0);
+  int nowTime=millis(); 
+  if(nowTime-startTime>500)
+  {
+    rawLambs.add(new RLamb(random(100,width-100), random(100,height-100), 6, 6));
+    startTime=nowTime;
+  }
+  for(int i=0; i<rawLambs.size();i++)
+  {
+    rawLambs.get(i).display();
+    rawLambs.get(i).move();
+  }
+  for(int i=0; i<chickNugs.size(); i++)
+  {
+    chickNugs.get(i).display();
+    chickNugs.get(i).move();
+  }
+  for(int i=0; i<rawLambs.size(); i++)
+  {
+    if (rawLambs.get(i).x > mouseX-50 && rawLambs.get(i).x < mouseX+50 && rawLambs.get(i).y > mouseY-80 && rawLambs.get(i).y < mouseY+80)
+      {
+        rawLambs.remove(i);
+        numLambsCaught++;
+        if(numLambsCaught%10==0)
+          lives++;
+      }
+  } 
+   if(nowTime-startTime2>15000)
+   {
+    chickNugs.add(new CNug(random(100, width-100), random(100, height-100), 6, 6));
+    startTime2=nowTime;
+   }
+  for(int i=0; i<chickNugs.size(); i++)
+  {
+    if(chickNugs.get(i).x > mouseX-50 && chickNugs.get(i).x < mouseX+50 && chickNugs.get(i).y > mouseY-90 && chickNugs.get(i).y < mouseY+10)
+    {
+      lives--;
+      chickNugs.remove(i);
+      chickNugs.add(new CNug(random(100, width-100), random(100, height-100), 6, 6));
+    }
+    
+  }
+  
+ 
+  if(lives<=0)
+  {
+    if(numLambsCaught>highScore)
+      highScore=numLambsCaught;
+    background(255,0,0);
+    textSize(100);
+    text("GAME OVER", 300, 400);
+    textSize(25);
+    text("Your Score:",500,450);
+    for(int i=0; i<rawLambs.size(); i++)
+      rawLambs.remove(i);
+    for(int i=0; i<chickNugs.size(); i++)
+      chickNugs.remove(i);
+    text(numLambsCaught,650,450);
+    text("High Score:",500,480);
+    text(highScore,650,480);
+    fill(255,0,0);
+    fill(255);
+    rect(500,500,165,70);
+    fill(0);
+    text("Play Again",518,545);
+    if(mousePressed)
+      {
+        if(mouseX>500 && mouseX<665 && mouseY>500 && mouseY<570)
+        reset();
+      }
+  }
+}
+
+
+void reset()
+{
+  lives=3;
+  numLambsCaught=0;
+  chickNugs.add(new CNug(random(100, width-100), random(100, height-100), 6, 6));
+  chickNugs.add(new CNug(random(100, width-100), random(100, height-100), 6, 6)); 
+}
+
+
+class RLamb{
+  float x;
+  float y;
+  float xSpeed;
+  float ySpeed;
+  
+  RLamb(float x, float y, float xSpeed, float ySpeed)
+  {
+    this.x=x;
+    this.y=y;
+    this.xSpeed=xSpeed;
+    this.ySpeed=ySpeed;
+  }
+  
+  void move()
+  {
+    x+=xSpeed;
+    if(x<-10 || x>width-80)
+      xSpeed*=-1;
+    y+=ySpeed;
+    if(y<0 || y>height-89)
+      ySpeed*=-1;
+  }
+  
+  void display()
+  {
+    image(rawLambImg, x, y);
+  }
+}
+
+class CNug{
+  float x;
+  float y;
+  float xSpeed;
+  float ySpeed;
+  
+  CNug(float x, float y, float xSpeed, float ySpeed)
+  {
+    this.x=x;
+    this.y=y;
+    this.xSpeed=xSpeed;
+    this.ySpeed=ySpeed;
+  }
+  
+  void move()
+  {
+    x+=xSpeed;
+    if(x<-10 || x>width-80)
+      xSpeed*=-1;
+    y+=ySpeed;
+    if(y<0 || y>height-89)
+      ySpeed*=-1;
+  }
+  
+  void display()
+  {
+    image(chickNugImg, x, y);
+  }
+}
